@@ -1,6 +1,6 @@
 namespace L06_Interfaces {
-    // Struktur des heterogenen assoziativen Arrays als Datensatz für eine studierende Person
-    export interface Studi {
+    
+    export interface Studi { // Struktur des heterogenen assoziativen Arrays als Datensatz für Student
         name: string;
         firstname: string;
         matrikel: number;
@@ -13,19 +13,12 @@ namespace L06_Interfaces {
 
     // Struktur des homogenen assoziativen Arrays, bei dem ein Datensatz der Matrikelnummer zugeordnet ist
     
-    //Export, damit die andere Datei vom anderen Bescheid weiß
-    
-    export interface Studis {
-        
-        //Matrieln werden abgespeichert, Datentyp sind nur Studenten, homogen, da nur ein Datentyp  da ist, assoziatives Array
-        
-         [matrikel: string]: Studi;
+    export interface Studis {           //Export, damit die andere Dateien die Datensätze übermittelt bekommen
+        [matrikel: string]: Studi;      //Matriel werden als string abgespeichert, Datentyp sind nur Studenten, homogen, da nur ein Datentyp  da ist, assoziatives Array
     }
 
-    // Simples Array zum Speichern der Studi-Datensätze (nur zur Demonstration)
-    export let studiSimpleArray: Studi[] = [];
     
-    // Homogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
-    export let studiHomoAssoc: Studis = {};
+    export let studiSimpleArray: Studi[] = []; //Array zum Speichern der Studi-Datensätze
+    export let studiHomoAssoc: Studis = {};    //Homogenes assoziatives Array zur Speicherung einer Person unter der Matrikelnummer
     
 }

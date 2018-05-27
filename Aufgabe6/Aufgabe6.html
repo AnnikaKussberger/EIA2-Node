@@ -18,7 +18,8 @@
 
 <meta charset="utf-8" />
 
-<link rel="stylesheet" href="Aufgabe6.1.css" type="text/css" media="screen"/>
+<link rel="stylesheet" href="Aufgabe6.1.css" type="text/css"
+	media="screen" />
 
 <script src="Aufgabe6.1.js" type="text/javascript" charset="utf-8"></script>
 
@@ -38,45 +39,31 @@
 
 
 
-		<!--��berschrift-->
-
+		<!--Überschrift im Dokument-->
 		<legend> Type student data here </legend>
 
-
-
 		<!--Nachname des Studenten-->
-
-		<input type="text" name="name" placeholder="name"/>
-
-
+		<input type="text" name="name" placeholder="name" />
 
 		<!--Vorname des Studenten-->
-
-		<input type="text" name="firstname" placeholder="firstname"/>
+		<input type="text" name="firstname" placeholder="firstname" />
 
 
 
 		<!--Matrikelnummer-->
-
-		<input type="text" name="matrikel" placeholder="matrikel"/>
-
-
-
-		<!--Alter des Studenten min 1 bis max 120-->
-
-		<input type="number" name="age" placeholder="age" min="1" max="120"/>
+		<input type="text" name="matrikel" placeholder="matrikel" />
 
 
 
-		<!--Radiobutton ob m��nnlich oder weiblich-->
+		<!--Alter des Studenten muss zwischen 1 und 120 sein-->
+		<input type="number" name="age" placeholder="age" min="1" max="120" />
 
-		<input type="radio" name="gender" value="male" id="male"/>
 
-		<label for="male">Male</label>
 
-		<input type="radio" name="gender" value="female" id="female"/>
-
-		<label for="female">Female</label>
+		<!--Radiobutton mit zwei Möglichkeiten zur Auswahl-->
+		<input type="radio" name="gender" value="male" id="male" /> <label
+			for="male">Männlich</label> <input type="radio" name="gender"
+			value="female" id="female" /> <label for="female">Weiblich</label>
 
 
 
@@ -85,23 +72,14 @@
 
 
 		<select name="studiengang" id="select">
-
 			<option value="MKB">MKB</option>
-
 			<option value="OMB">OMB</option>
-
 			<option value="MIB">MIB</option>
-
 		</select>
 
 
 
-
-
-
-
-		<!--Button um die Information zu speichern-->
-
+		<!--Button um Datensatz in Database zu speichern-->
 		<button type="button" id="insert">Insert to database</button>
 
 
@@ -111,32 +89,21 @@
 
 
 	<fieldset id="searchStudents">
+		<legend> Suche nach Student </legend>
+
+		<!--Matrikelnummer-->
+		<input type="text" name="search" placeholder="matrikel" />
 
 
 
-	<legend> Suche nach Student </legend>
-
-
-
-	<!--Matrikelnummer-->
-
-		<input type="text" name="search" placeholder="matrikel"/>
-
-
-
-	<!--Button um den Studenten nach der Matrikelnummer zu suchen-->
-
+		<!--Button um mit Matrikelnummer zu suchen-->
 		<button type="button" id="search">Search</button>
 
 
 
-	<!--Textfeld-->
-
-
+		<!--Textfeld-->
 
 		<textarea id="outputMatrikel" rows="20" cols="90"> </textarea>
-
-
 
 	</fieldset>
 
@@ -144,35 +111,25 @@
 
 	<!--Fielset um Formelemente zu gruppieren-->
 
-
-
 	<fieldset id="output">
 
 		<legend> All student data </legend>
 
-
-
 		<!Refresh Button-->
-
-
-
 		<button type="button" id="refresh">Refresh</button>
 
-
-
+		
 		<!--Textfeld-->
 
 
 
 		<textarea rows="20" cols="90"> </textarea>
 
-
-
 	</fieldset>
 
 
 
-	<button id="exampleData">Cooles Zeugs</button>
+	<button id="exampleData">beispiel</button>
 
 
 
