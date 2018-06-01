@@ -13,7 +13,7 @@ namespace L06_Interfaces {
 
     // Struktur des homogenen assoziativen Arrays, bei dem ein Datensatz der Matrikelnummer zugeordnet ist
     
-    export interface Studis {           //Export, damit die andere Dateien die Datensätze übermittelt bekommen
+    export interface Studis {           //Export, damit die andere Dateien die Datensätze üübermittelt bekommen
         [matrikel: string]: Studi;      //Matriel werden als string abgespeichert, Datentyp sind nur Studenten, homogen, da nur ein Datentyp  da ist, assoziatives Array
     }
 
