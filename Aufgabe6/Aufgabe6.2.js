@@ -70,22 +70,15 @@ var L06_Interfaces;
         console.groupEnd();
     }
     //Funktion, um Studenten nach Matrikelnummer zu suchen
+    //Funktion search aufstellen
     function search(_event) {
-        let output = document.getElementsByTagName("textarea")[0]; //Auf erste Textarea zugreifen
-        output.value = "";
-        let inputs = document.getElementsByTagName("input"); //Zugriff auf Inputs
-        let matrikel = inputs[6].value; //Matrikel wird aufgerufen durch den 6. Input
-        let studi = L06_Interfaces.studiHomoAssoc[matrikel]; //Matrikelnummer wird gespeichert
-        if (studi) {
-            let line = matrikel + ": "; //�bereinstimmung mit Student
-            line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
-            line += studi.gender ? ", (M)" : ", (F)";
-            line += studi.studiengang + ": ";
-            output.value += line + "\n";
-        }
-        else {
-            alert("Es wurde kein Student gefunden, bitte versuchen sie es noch einmal.");
-        }
+        //Zugriff auf Inputs
+        let inputs = document.getElementsByTagName("input");
+        //Matrikel wird aufgerufen durch den 6. Input
+        let matrikel = inputs[6].value;
+        console.log(matrikel);
+        //Funktion sendDataToHost, Variable matrikel wird �bergeben
+        sendDataToHost("searchStudent", matrikel);
     }
     //Funktion sendDataToHost
     function sendDataToHost(method, data = undefined) {
@@ -104,6 +97,27 @@ var L06_Interfaces;
                 console.log('Refreshing Students...'); //Sobald eine Antwort ankommt ersetze studiHomoAssoc mit der Antwort und f�hre die Methode refresh aus
                 L06_Interfaces.studiHomoAssoc = JSON.parse(xhr.responseText); //�berschreibe studiHomoAssoc mit der Antwort
                 refresh();
+            };
+        }
+        else if (method == "searchStudent") {
+            //Onload wird erst ausgef�hrt wenn es eine Antwort bekommt
+            xhr.onload = function () {
+                // Wenn undefined zur�ckgegeben wird, gebe Meldung aus
+                if (xhr.responseText == "undefined") {
+                    alert("Es wurde kein Student gefunden, bitte versuchen sie es noch einmal.");
+                    return;
+                }
+                // Student R�ckgabe String wird zum Objekt umgewandelt
+                let student = JSON.parse(xhr.responseText);
+                //Auf erste Textarea zugreifen
+                let output = document.getElementsByTagName("textarea")[0];
+                output.value = "";
+                //�bereinstimmung mit Student
+                let line = data + ": ";
+                line += student.name + ", " + student.firstname + ", " + student.age + " Jahre ";
+                line += student.gender ? ", (M)" : ", (F)";
+                line += student.studiengang + ": ";
+                output.value += line + "\n";
             };
         }
         //Sende Request zum Server

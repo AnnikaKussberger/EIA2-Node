@@ -110,39 +110,23 @@ namespace L06_Interfaces {
         console.groupEnd();
     }
 
-    //Funktion, um Studenten nach Matrikelnummer zu suchen
-   
-    function search( _event: Event ): void {  //Funktion search 
+    
+     //Funktion, um Studenten nach Matrikelnummer zu suchen
+    //Funktion search aufstellen
+    function search( _event: Event ): void {
 
+        //Zugriff auf Inputs
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName( "input" );
 
-       
-        let output: HTMLTextAreaElement = document.getElementsByTagName( "textarea" )[0];  //Auf erste Textarea zugreifen
+        //Matrikel wird aufgerufen durch den 6. Input
+        let matrikel: string = inputs[6].value;
 
-        output.value = "";
+        console.log(matrikel);
 
-        
-        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName( "input" ); //Zugriff auf Inputs
-
-       
-        let matrikel: string = inputs[6].value;  //Matrikel wird aufgerufen durch den 6. Input
-
-       
-        let studi: Studi = studiHomoAssoc[matrikel];  //Matrikelnummer wird gespeichert
-
-        if ( studi ) { //wenn übereinstimmung mit student
-            
-           
-            let line: string = matrikel + ": ";  //Übereinstimmung mit Student
-            line += studi.name + ", " + studi.firstname + ", " + studi.age + " Jahre ";
-            line += studi.gender ? ", (M)" : ", (F)";
-            line += studi.studiengang + ": ";
-            output.value += line + "\n";
-            
-        
-        } else { //also Keine Übereinstimmung mit Student
-            alert( "Es wurde kein Student gefunden, bitte versuchen sie es noch einmal." );
-        }
+        //Funktion sendDataToHost, Variable matrikel wird übergeben
+        sendDataToHost("searchStudent", matrikel);
     }
+
     
     //Funktion sendDataToHost
         function sendDataToHost(method: string, data: any = undefined) { //Parameter method: string, data: any = undefined (Optionalparameter, muss nicht unbedingt angeben werden(Daten werden schon übergeben))
@@ -165,7 +149,33 @@ namespace L06_Interfaces {
                 refresh();
             }
         }
-        
+        else if ( method == "searchStudent" ) {
+
+            //Onload wird erst ausgeführt wenn es eine Antwort bekommt
+            xhr.onload = function() {
+                // Wenn undefined zurückgegeben wird, gebe Meldung aus
+                if (xhr.responseText == "undefined") {
+                    alert( "Es wurde kein Student gefunden, bitte versuchen sie es noch einmal." );
+                    return;
+                }
+                    
+                // Student Rückgabe String wird zum Objekt umgewandelt
+                let student = JSON.parse(xhr.responseText);
+
+                //Auf erste Textarea zugreifen
+                let output: HTMLTextAreaElement = document.getElementsByTagName( "textarea" )[0];
+
+                output.value = "";
+                
+                //Übereinstimmung mit Student
+                let line: string = data + ": ";
+                line += student.name + ", " + student.firstname + ", " + student.age + " Jahre ";
+                line += student.gender ? ", (M)" : ", (F)";
+                line += student.studiengang + ": ";
+                output.value += line + "\n";
+                
+            }
+}
         //Sende Request zum Server
         
         xhr.send();
